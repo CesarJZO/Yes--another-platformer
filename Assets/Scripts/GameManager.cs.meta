@@ -5,7 +5,7 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - spawnPoint: {instanceID: 0}
-  - player: {fileID: 3380373842016208016, guid: 782d7bce57fb44d40b47dd0ca69a04a9, type: 3}
+  - player: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

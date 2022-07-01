@@ -83,6 +83,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.25
+  isAlive: 1
+  gameManager: {fileID: 0}
 --- !u!114 &3380373842016208017
 MonoBehaviour:
   m_ObjectHideFlags: 0

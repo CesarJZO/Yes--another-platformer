@@ -8,6 +8,8 @@ TagManager:
   - Spikes
   - Enemy
   - Weak Point
+  - Checkpoint
+  - Level End
   layers:
   - Default
   - TransparentFX
@@ -44,4 +46,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1763659217
+    locked: 0
+  - name: Foreground
+    uniqueID: 276287275
     locked: 0
