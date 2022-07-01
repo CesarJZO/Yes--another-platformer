@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Cherry
   - Spikes
+  - Enemy
+  - Weak Point
   layers:
   - Default
   - TransparentFX

@@ -42,8 +42,16 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (!col.gameObject.CompareTag("Spikes")) return;
-        isAlive = false;
-        _rigidbody.velocity = Vector2.zero;
+        if (col.gameObject.CompareTag("Spikes") || col.gameObject.CompareTag("Enemy"))
+        {
+            isAlive = false;
+            _rigidbody.velocity = Vector2.zero;
+        }
+        else if (col.gameObject.CompareTag("Weak Point"))
+        {
+            var parent = col.transform.parent;
+            parent.GetComponent<BoxCollider2D>().enabled = false;
+            Destroy(parent.gameObject);
+        }
     }
 }
