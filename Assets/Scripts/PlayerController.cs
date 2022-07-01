@@ -52,7 +52,6 @@ public class PlayerController : MonoBehaviour
         if (col.gameObject.CompareTag("Weak Point"))
         {
             var parent = col.transform.parent;
-            Debug.Log(parent.name);
             parent.GetComponent<BoxCollider2D>().enabled = false;
             Destroy(parent.gameObject);
         }
