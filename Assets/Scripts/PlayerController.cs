@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private InputAction _move;
     private InputAction _jump;
 
+    public GameManager gameManager;
 
     private void Awake()
     {
@@ -38,6 +39,8 @@ public class PlayerController : MonoBehaviour
     {
         if (!col.CompareTag("Cherry")) return;
         Destroy(col.gameObject);
+        gameManager.coins++;
+
     }
 
     private void OnCollisionEnter2D(Collision2D col)
