@@ -43,6 +43,11 @@ public class PlayerController : MonoBehaviour
             gameManager.FinishLevel();
             Die();
         }
+        if (col.CompareTag("Poisoned"))
+        {
+            Destroy(col.gameObject);
+            Die();
+        }
         if (col.CompareTag("Checkpoint"))
             gameManager.spawnPoint.position = col.transform.position;
     }

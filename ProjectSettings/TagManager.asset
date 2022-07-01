@@ -10,6 +10,7 @@ TagManager:
   - Weak Point
   - Checkpoint
   - Level End
+  - Poisoned
   layers:
   - Default
   - TransparentFX
