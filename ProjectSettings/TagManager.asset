@@ -11,6 +11,7 @@ TagManager:
   - Checkpoint
   - Level End
   - Poisoned
+  - Gem
   layers:
   - Default
   - TransparentFX

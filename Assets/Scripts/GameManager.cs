@@ -3,6 +3,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public int coins;
+    public int gems;
     public int lives;
 
     public Transform spawnPoint;
@@ -31,7 +32,7 @@ public class GameManager : MonoBehaviour
             {
                 lives--;
                 player.transform.position = spawnPoint.position;
-                player.isAlive = true;
+                player.Respawn();
                 timer = 0;
             }
             else

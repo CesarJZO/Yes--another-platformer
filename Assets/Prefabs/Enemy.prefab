@@ -90,6 +90,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1849742732474245267}
   - component: {fileID: 1849742732474245268}
+  - component: {fileID: 2421808384572883830}
   - component: {fileID: 1849742732474245269}
   - component: {fileID: 1849742732474245270}
   - component: {fileID: 1849742732474245266}
@@ -128,8 +129,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44588ea11bfe41e798d5330615411f9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.025
+  speed: 0.8
   distance: 1
+--- !u!95 &2421808384572883830
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849742732474245271}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7928727036fb6fd4baf1a9c0cd490a12, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &1849742732474245269
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -189,7 +210,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1849742732474245271}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0

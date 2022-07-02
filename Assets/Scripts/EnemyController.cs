@@ -18,6 +18,7 @@ public class EnemyController : MonoBehaviour
         _leftPos = position.x - distance;
         _rightPos = position.x + distance;
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer.flipX = true;
     }
 
     private void Update()

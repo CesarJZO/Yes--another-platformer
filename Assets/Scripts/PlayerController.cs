@@ -4,13 +4,16 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public float speed;
+    public float dieForce;
     private float _horizontalInput;
     public bool isAlive = true;
 
     private PlayerMovement _movement;
-    private Rigidbody2D _rigidbody;
     public GameManager gameManager;
-    
+    private Rigidbody2D _rigidbody;
+    private BoxCollider2D _boxCollider;
+    private CircleCollider2D _circleCollider;
+
     private InputAction _move;
 
     #region Animation
@@ -29,8 +32,10 @@ public class PlayerController : MonoBehaviour
     {
         _movement = GetComponent<PlayerMovement>();
         _rigidbody = GetComponent<Rigidbody2D>();
+        _boxCollider = GetComponent<BoxCollider2D>();
+        _circleCollider = GetComponent<CircleCollider2D>();
         _move = GetComponent<PlayerInput>().actions[ActionName.Move.ToString()];
-        
+
         _animator = GetComponent<Animator>();
         _moveAnimId = Animator.StringToHash("Move");
         _jumpAnimId = Animator.StringToHash("Jump");
@@ -43,7 +48,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         if (!isAlive) return;
-        _horizontalInput = _move.ReadValue<float>(); 
+        _horizontalInput = _move.ReadValue<float>();
         _movement.Move(_horizontalInput * speed);
     }
 
@@ -64,21 +69,30 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
+        var otherObject = col.gameObject;
         if (col.CompareTag("Cherry"))
         {
-            Destroy(col.gameObject);
+            Destroy(otherObject);
             gameManager.coins++;
         }
+
+        if (col.CompareTag("Gem"))
+        {
+            Destroy(otherObject);
+            gameManager.gems++;
+        }
+
         if (col.CompareTag("Level End"))
         {
             gameManager.FinishLevel();
-            Die();
         }
+
         if (col.CompareTag("Poisoned"))
         {
-            Destroy(col.gameObject);
+            Destroy(otherObject);
             Die();
         }
+
         if (col.CompareTag("Checkpoint"))
             gameManager.spawnPoint.position = col.transform.position;
     }
@@ -91,13 +105,22 @@ public class PlayerController : MonoBehaviour
             parent.GetComponent<BoxCollider2D>().enabled = false;
             Destroy(parent.gameObject);
         }
+
         if (col.gameObject.CompareTag("Spikes") || col.gameObject.CompareTag("Enemy"))
             Die();
+    }
+
+    public void Respawn()
+    {
+        isAlive = true;
+        _circleCollider.enabled = _boxCollider.enabled = true;
     }
 
     private void Die()
     {
         isAlive = false;
+        _circleCollider.enabled = _boxCollider.enabled = false;
+        _rigidbody.AddForce(Vector2.up * dieForce);
         _animator.SetTrigger(_dieAnimId);
         _rigidbody.velocity = Vector2.zero;
     }
