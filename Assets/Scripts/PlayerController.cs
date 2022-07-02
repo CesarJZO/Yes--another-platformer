@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public float speed;
+    public float deadZone;
     public float dieForce;
     private float _horizontalInput;
     public bool isAlive = true;
@@ -54,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        _animator.SetBool(_moveAnimId, Mathf.Abs(_horizontalInput) > 0.01);
+        _animator.SetBool(_moveAnimId, Mathf.Abs(_rigidbody.velocity.x) > deadZone);
         _animator.SetFloat(_vertAnimId, _rigidbody.velocity.y);
         _animator.SetBool(_groundAnimId, _movement.grounded);
         _animator.SetBool(_isAliveAnimId, isAlive);
