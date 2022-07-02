@@ -29,6 +29,15 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+    #region Audio
+
+    private AudioSource _audioSource;
+    public AudioClip coinAudio;
+    public AudioClip hurtAudio;
+    public AudioClip jumpAudio;
+
+    #endregion
+
     private void Awake()
     {
         _movement = GetComponent<PlayerMovement>();
@@ -44,6 +53,8 @@ public class PlayerController : MonoBehaviour
         _isAliveAnimId = Animator.StringToHash("Is Alive");
         _dieAnimId = Animator.StringToHash("Die");
         _vertAnimId = Animator.StringToHash("Vertical Velocity");
+        
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
@@ -64,6 +75,7 @@ public class PlayerController : MonoBehaviour
     public void OnJump()
     {
         if (!isAlive) return;
+        _audioSource.PlayOneShot(jumpAudio);
         _movement.Jump();
         _animator.SetTrigger(_jumpAnimId);
     }
@@ -75,10 +87,12 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(otherObject);
             gameManager.coins++;
+            _audioSource.PlayOneShot(coinAudio);
         }
 
         if (col.CompareTag("Gem"))
         {
+            _audioSource.PlayOneShot(coinAudio);
             Destroy(otherObject);
             gameManager.gems++;
         }
@@ -123,6 +137,7 @@ public class PlayerController : MonoBehaviour
     private void Die()
     {
         isAlive = false;
+        _audioSource.PlayOneShot(hurtAudio);
         _circleCollider.enabled = _boxCollider.enabled = false;
         _rigidbody.velocity = Vector2.zero;
         _rigidbody.AddForce(Vector2.up * dieForce);
