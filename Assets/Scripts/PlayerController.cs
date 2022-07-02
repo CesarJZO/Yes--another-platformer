@@ -120,8 +120,8 @@ public class PlayerController : MonoBehaviour
     {
         isAlive = false;
         _circleCollider.enabled = _boxCollider.enabled = false;
+        _rigidbody.velocity = Vector2.zero;
         _rigidbody.AddForce(Vector2.up * dieForce);
         _animator.SetTrigger(_dieAnimId);
-        _rigidbody.velocity = Vector2.zero;
     }
 }
