@@ -100,14 +100,17 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.CompareTag("Weak Point"))
+        var otherObject = col.gameObject;
+        if (otherObject.CompareTag("Weak Point"))
         {
             var parent = col.transform.parent;
             parent.GetComponent<BoxCollider2D>().enabled = false;
             Destroy(parent.gameObject);
         }
 
-        if (col.gameObject.CompareTag("Spikes") || col.gameObject.CompareTag("Enemy"))
+        if (otherObject.CompareTag("Spikes") || 
+            otherObject.CompareTag("Enemy") || 
+            otherObject.CompareTag("Abyss"))
             Die();
     }
 
