@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,7 +14,15 @@ public class GameManager : MonoBehaviour
     public float timer;
 
     public bool gameOver;
-    
+    public bool levelFinished;
+
+    private InputAction _start;
+
+    private void Awake()
+    {
+        _start = player.playerInput.actions[ActionName.Start.ToString()];
+    }
+
     private void Start()
     {
         player.transform.position = spawnPoint.position;
@@ -37,11 +46,19 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Game Over");
                 gameOver = true;
             }
         }
+
+        if (gameOver || levelFinished)
+            if (_start.WasPressedThisFrame())
+            {
+                // Load main menu
+            }
     }
 
-    public void FinishLevel() => Debug.Log("You Win!");
+    public void FinishLevel()
+    {
+        levelFinished = true;
+    }
 }

@@ -9,13 +9,17 @@ public class PlayerController : MonoBehaviour
     private float _horizontalInput;
     public bool isAlive = true;
 
+    #region Components
+    
     private PlayerMovement _movement;
     public GameManager gameManager;
     private Rigidbody2D _rigidbody;
     private BoxCollider2D _boxCollider;
     private CircleCollider2D _circleCollider;
-
+    public PlayerInput playerInput;
     private InputAction _move;
+
+    #endregion
 
     #region Animation
 
@@ -44,7 +48,8 @@ public class PlayerController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _boxCollider = GetComponent<BoxCollider2D>();
         _circleCollider = GetComponent<CircleCollider2D>();
-        _move = GetComponent<PlayerInput>().actions[ActionName.Move.ToString()];
+        playerInput = GetComponent<PlayerInput>();
+        _move = playerInput.actions[ActionName.Move.ToString()];
 
         _animator = GetComponent<Animator>();
         _moveAnimId = Animator.StringToHash("Move");
@@ -134,7 +139,7 @@ public class PlayerController : MonoBehaviour
         _circleCollider.enabled = _boxCollider.enabled = true;
     }
 
-    private void Die()
+    public void Die()
     {
         isAlive = false;
         _audioSource.PlayOneShot(hurtAudio);

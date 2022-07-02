@@ -1,5 +1,6 @@
 public enum ActionName
 {
     Jump,
-    Move
+    Move,
+    Start
 }
