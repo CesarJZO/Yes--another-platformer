@@ -1,3 +1,4 @@
+using UnityEditor.U2D.Sprites;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -60,5 +61,6 @@ public class GameManager : MonoBehaviour
     public void FinishLevel()
     {
         levelFinished = true;
+        player.rb.velocity = Vector2.zero;
     }
 }

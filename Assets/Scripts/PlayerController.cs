@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     
     private PlayerMovement _movement;
     public GameManager gameManager;
-    private Rigidbody2D _rigidbody;
+    public Rigidbody2D rb;
     private BoxCollider2D _boxCollider;
     private CircleCollider2D _circleCollider;
     public PlayerInput playerInput;
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _movement = GetComponent<PlayerMovement>();
-        _rigidbody = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         _boxCollider = GetComponent<BoxCollider2D>();
         _circleCollider = GetComponent<CircleCollider2D>();
         playerInput = GetComponent<PlayerInput>();
@@ -64,22 +64,22 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isAlive) return;
+        if (gameManager.levelFinished || !isAlive) return;
         _horizontalInput = _move.ReadValue<float>();
         _movement.Move(_horizontalInput * speed);
     }
 
     private void LateUpdate()
     {
-        _animator.SetBool(_moveAnimId, Mathf.Abs(_rigidbody.velocity.x) > deadZone);
-        _animator.SetFloat(_vertAnimId, _rigidbody.velocity.y);
+        _animator.SetBool(_moveAnimId, Mathf.Abs(rb.velocity.x) > deadZone);
+        _animator.SetFloat(_vertAnimId, rb.velocity.y);
         _animator.SetBool(_groundAnimId, _movement.grounded);
         _animator.SetBool(_isAliveAnimId, isAlive);
     }
 
     public void OnJump()
     {
-        if (!isAlive) return;
+        if (gameManager.levelFinished || !isAlive) return;
         _audioSource.PlayOneShot(jumpAudio);
         _movement.Jump();
         _animator.SetTrigger(_jumpAnimId);
@@ -144,8 +144,8 @@ public class PlayerController : MonoBehaviour
         isAlive = false;
         _audioSource.PlayOneShot(hurtAudio);
         _circleCollider.enabled = _boxCollider.enabled = false;
-        _rigidbody.velocity = Vector2.zero;
-        _rigidbody.AddForce(Vector2.up * dieForce);
+        rb.velocity = Vector2.zero;
+        rb.AddForce(Vector2.up * dieForce);
         _animator.SetTrigger(_dieAnimId);
     }
 }
