@@ -54,6 +54,7 @@ MonoBehaviour:
   timeToRespawn: 2
   timer: 0
   gameOver: 0
+  levelFinished: 0
 --- !u!82 &1372760931
 AudioSource:
   m_ObjectHideFlags: 0

@@ -89,7 +89,8 @@ MonoBehaviour:
   dieForce: 80
   isAlive: 1
   gameManager: {fileID: 0}
-  audioSource: {fileID: 1485916180787059694}
+  rb: {fileID: 0}
+  playerInput: {fileID: 3380373842016208017}
   coinAudio: {fileID: 8300000, guid: 665e7a6276663364a9ea0ff13fd44235, type: 3}
   hurtAudio: {fileID: 8300000, guid: 61a47adcf4e25b24787b4ef3757cc079, type: 3}
   jumpAudio: {fileID: 8300000, guid: 2dd69095e0a847049804ef06eb809a07, type: 3}

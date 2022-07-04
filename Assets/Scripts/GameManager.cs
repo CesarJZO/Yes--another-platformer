@@ -61,6 +61,8 @@ public class GameManager : MonoBehaviour
     public void FinishLevel()
     {
         levelFinished = true;
-        player.rb.velocity = Vector2.zero;
+        var velocity = player.rb.velocity;
+        velocity.x = 0;
+        player.rb.velocity = velocity;
     }
 }
