@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ModeSelector : MonoBehaviour
@@ -36,7 +37,8 @@ public class ModeSelector : MonoBehaviour
                 image.sprite = tagToCollect switch
                 {
                     CollectTag.Cherry => cherrySprite,
-                    CollectTag.Enemy => enemySprite
+                    CollectTag.Enemy => enemySprite,
+                    _ => throw new ArgumentOutOfRangeException()
                 };
                 _objects = GameObject.FindGameObjectsWithTag(tagToCollect.ToString());
                 collectathonText.text = $"x{_objects.Length}";

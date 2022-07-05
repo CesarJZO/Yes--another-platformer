@@ -1,4 +1,3 @@
-using System.ComponentModel.Design;
 using mastermind;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,6 +40,16 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (gameOver || levelFinished)
+        {
+            FinishLevel();
+            if (_start.WasPressedThisFrame() || Keyboard.current.escapeKey.wasPressedThisFrame)
+            {
+                Debug.Log("Escape pushed");
+                menuController.LoadScene(0);
+            }
+            return;
+        }
         if (player.isAlive || gameOver) return;
         if (timer <= timeToRespawn)
         {
@@ -58,15 +67,6 @@ public class GameManager : MonoBehaviour
             else
             {
                 gameOver = true;
-            }
-        }
-
-        if (gameOver || levelFinished)
-        {
-            FinishLevel();
-            if (_start.WasPressedThisFrame())
-            {
-                menuController.LoadScene(0);
             }
         }
 

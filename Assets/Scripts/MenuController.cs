@@ -5,7 +5,7 @@ namespace mastermind
 {
     public class MenuController : MonoBehaviour
     {
-        public void LoadScene(int sceneId) => LoadScene(sceneId);
+        public void LoadScene(int sceneId) => SceneManager.LoadScene(sceneId);
 
         public void QuitGame() => Application.Quit(0);
     }
