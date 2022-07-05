@@ -99,7 +99,6 @@ public class PlayerController : MonoBehaviour
         if (col.CompareTag("Cherry"))
         {
             Destroy(otherObject);
-            gameManager.coins++;
             _audioSource.PlayOneShot(coinAudio);
         }
 
@@ -107,7 +106,6 @@ public class PlayerController : MonoBehaviour
         {
             _audioSource.PlayOneShot(coinAudio);
             Destroy(otherObject);
-            gameManager.gems++;
         }
 
         if (col.CompareTag("Level End"))

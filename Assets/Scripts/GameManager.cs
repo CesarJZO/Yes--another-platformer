@@ -5,8 +5,6 @@ using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
-    public int coins;
-    public int gems;
     public int lives;
 
     public Transform spawnPoint;
@@ -44,10 +42,7 @@ public class GameManager : MonoBehaviour
         {
             FinishLevel();
             if (_start.WasPressedThisFrame() || Keyboard.current.escapeKey.wasPressedThisFrame)
-            {
-                Debug.Log("Escape pushed");
                 menuController.LoadScene(0);
-            }
             return;
         }
         if (player.isAlive || gameOver) return;
