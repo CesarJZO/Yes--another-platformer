@@ -1,5 +1,7 @@
-using UnityEditor.U2D.Sprites;
+using System.ComponentModel.Design;
+using mastermind;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
@@ -17,6 +19,13 @@ public class GameManager : MonoBehaviour
     public bool gameOver;
     public bool levelFinished;
 
+    public MenuController menuController;
+    
+    [Header("UI")]
+    public Text lifeText;
+    public GameObject levelEndPanel;
+    public Text levelEndText;
+
     private InputAction _start;
 
     private void Awake()
@@ -26,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        levelEndPanel.SetActive(false);
         player.transform.position = spawnPoint.position;
     }
 
@@ -52,14 +62,25 @@ public class GameManager : MonoBehaviour
         }
 
         if (gameOver || levelFinished)
+        {
+            FinishLevel();
             if (_start.WasPressedThisFrame())
             {
-                // Load main menu
+                menuController.LoadScene(0);
             }
+        }
+
+        lifeText.text = $"x{lives}";
     }
 
     public void FinishLevel()
     {
+        levelEndPanel.SetActive(true);
+        if (gameOver)
+            levelEndText.text = "GAME OVER";
+        if (levelFinished) 
+            levelEndText.text = "LEVEL FINISHED";
+        
         levelFinished = true;
         var velocity = player.rb.velocity;
         velocity.x = 0;

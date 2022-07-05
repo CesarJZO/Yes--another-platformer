@@ -3,12 +3,15 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Settings")]
     public float speed;
     public float deadZone;
     public float dieForce;
     private float _horizontalInput;
     public bool isAlive = true;
 
+    [Space]
+    
     #region Components
     
     private PlayerMovement _movement;
@@ -21,6 +24,8 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+    [Space]
+    
     #region Animation
 
     private Animator _animator;
@@ -33,6 +38,8 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+    [Space]
+        
     #region Audio
 
     private AudioSource _audioSource;
@@ -79,6 +86,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump()
     {
+        Application.targetFrameRate = 45;
         if (gameManager.levelFinished || !isAlive) return;
         _audioSource.PlayOneShot(jumpAudio);
         _movement.Jump();
